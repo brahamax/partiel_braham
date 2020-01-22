@@ -3,6 +3,7 @@ package service;
 import metier.Cours;
 import metier.Etudiants;
 
+
 public interface Methodes {
 public static void Creer_E(String nom, String prenom, String mail, String adresse, String tel, int id, String date) {}
 static void Associer_C_E(Etudiants e, Cours c) {}
