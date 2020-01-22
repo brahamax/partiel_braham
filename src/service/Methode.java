@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import metier.Cours;
+import metier.Enseignants;
 import metier.Etudiants;
 
 public class Methode implements Methodes{
@@ -26,13 +27,13 @@ public class Methode implements Methodes{
 		B.deconnection();
 	}
 	
-	static void Associer_C_E(Etudiants e,Cours c) throws ClassNotFoundException, SQLException {
+	static void Associer_C_E(Etudiants e,Enseignants en, int h, String t) throws ClassNotFoundException, SQLException {
 		//connexion bdd
 		B.connection();
 		//traitement
 		st = B.getCn().createStatement();
-		sql = "";
-		rs = st.executeQuery(sql);
+		sql = "insert into Cours values('"+Integer.toString(e.getId())+"','"+Integer.toString(en.getId())+"','"+t+"','"+Integer.toString(h)+")";
+		st.executeUpdate(sql);
 		
 		//deconnexion bdd
 		B.deconnection();
@@ -75,7 +76,6 @@ public class Methode implements Methodes{
 		st = B.getCn().createStatement();
 		sql = "DELETE FROM Etudiants WHERE idE = "+Integer.toString(e.getId());
 		st.executeUpdate(sql);
-		rs = st.executeQuery(sql);
 		
 		//deconnexion bdd
 		B.deconnection();
@@ -105,8 +105,9 @@ public class Methode implements Methodes{
 		B.connection();
 		//traitement
 		st = B.getCn().createStatement();
-		sql = "";
-		rs = st.executeQuery(sql);
+		sql = "UPDATE Etudiants " +
+                "SET authentification = 1 WHERE idE="+Integer.toString(e.getId());
+		st.executeUpdate(sql);
 		
 		//deconnexion bdd
 		B.deconnection();
